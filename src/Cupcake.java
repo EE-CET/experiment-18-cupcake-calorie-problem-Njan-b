@@ -1,30 +1,35 @@
-import java.util.Scanner;
+import java.util.*;
 
-public class Cupcakes {
+public class Cupcake {
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
+        
+        // Read number of cupcakes
         int n = sc.nextInt();
-        int[] calories = new int[n];
+        
+        // Read calorie counts
+        long[] calories = new long[n];
         for (int i = 0; i < n; i++) {
-            calories[i] = sc.nextInt();
+            calories[i] = sc.nextLong();
         }
-
-        // Sort in descending order manually
-        for (int i = 0; i < n - 1; i++) {
-            for (int j = 0; j < n - i - 1; j++) {
-                if (calories[j] < calories[j + 1]) {
-                    int temp = calories[j];
-                    calories[j] = calories[j + 1];
-                    calories[j + 1] = temp;
-                }
-            }
+        
+        // Sort in descending order
+        Arrays.sort(calories);
+        
+        // Reverse to get descending order
+        for (int i = 0; i < n / 2; i++) {
+            long temp = calories[i];
+            calories[i] = calories[n - 1 - i];
+            calories[n - 1 - i] = temp;
         }
-
+        
+        // Calculate minimum miles
         long miles = 0;
         for (int i = 0; i < n; i++) {
-            miles += calories[i] * (1L << i);
+            miles += calories[i] * (1L << i); // 2^i
         }
-
+        
         System.out.println(miles);
+        sc.close();
     }
 }
