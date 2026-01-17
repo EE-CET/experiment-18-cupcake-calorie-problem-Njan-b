@@ -1,21 +1,28 @@
-import java.util.Arrays;
-import java.util.Collections;
 import java.util.Scanner;
 
-public class Cupcake {
+public class Cupcakes {
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
         int n = sc.nextInt();
-        Integer[] calories = new Integer[n];
+        int[] calories = new int[n];
         for (int i = 0; i < n; i++) {
             calories[i] = sc.nextInt();
         }
 
-        Arrays.sort(calories, Collections.reverseOrder()); // Sort descending
+        // Sort in descending order manually
+        for (int i = 0; i < n - 1; i++) {
+            for (int j = 0; j < n - i - 1; j++) {
+                if (calories[j] < calories[j + 1]) {
+                    int temp = calories[j];
+                    calories[j] = calories[j + 1];
+                    calories[j + 1] = temp;
+                }
+            }
+        }
 
         long miles = 0;
         for (int i = 0; i < n; i++) {
-            miles += calories[i] * (1L << i); // 2^i multiplier
+            miles += calories[i] * (1L << i);
         }
 
         System.out.println(miles);
