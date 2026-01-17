@@ -1,27 +1,21 @@
 import java.util.Arrays;
-import java.util.Collections;
 import java.util.Scanner;
 
 public class Cupcake {
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
-        
         int n = sc.nextInt();
-        Integer[] calories = new Integer[n];
-        
+        int[] calories = new int[n];
         for (int i = 0; i < n; i++) {
             calories[i] = sc.nextInt();
         }
-        
-        Arrays.sort(calories, Collections.reverseOrder());
-        
+
+        Arrays.sort(calories); // Sort in ascending order
         long miles = 0;
         for (int i = 0; i < n; i++) {
-            miles += (long) Math.pow(2, i) * calories[i];
+            miles += calories[n - 1 - i] * (1L << i); // Eat highest calorie first
         }
-        
+
         System.out.println(miles);
-        
-        sc.close();
     }
 }
